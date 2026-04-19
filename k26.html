@@ -33,9 +33,11 @@
             <div class="card-body p-4">
                 
                 <div class="mb-4 d-flex gap-2 flex-wrap">
-                    <button class="btn btn-outline-primary btn-sm filter-btn active" onclick="filterPraktik('All')">Semua Praktik</button>
-                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterPraktik('1')">Praktik 1</button>
-                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterPraktik('2')">Praktik 2</button>
+                    <button class="btn btn-outline-primary btn-sm filter-btn active" onclick="filterSemester('All')">Semua Semester</button>
+                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterSemester('1')">Semester 1</button>
+                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterSemester('2')">Semester 2</button>
+                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterSemester('3')">Semester 3</button>
+                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterSemester('4')">Semester 4</button>
                 </div>
 
                 <div class="table-responsive">
@@ -44,9 +46,10 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="15%">Kode</th>
-                                <th width="35%">Mata Kuliah (ID)</th>
-                                <th width="10%">Praktik</th>
-                                <th width="15%">Tahun Pembuatan</th>
+                                <th width="30%">Mata Kuliah (ID)</th>
+                                <th width="5%" class="text-center">Sem</th>
+                                <th width="10%" class="text-center">Praktik</th>
+                                <th width="15%" class="text-center">Tahun Pembuatan</th>
                                 <th width="20%">Link Modul</th>
                             </tr>
                         </thead>
@@ -55,8 +58,8 @@
                                 <td>1</td>
                                 <td>SVRE264107</td>
                                 <td>Praktikum Pengukuran Listrik</td>
-                                <td>2</td>
-                                <td>2025</td>
+                                <td class="text-center">1</td> <td class="text-center">2</td>
+                                <td class="text-center">2025</td>
                                 <td>
                                     <button class="btn btn-sm btn-secondary w-100" disabled>
                                         <i class="bi bi-hourglass-split"></i> Akan dikembangkan
@@ -68,12 +71,27 @@
                                 <td>2</td>
                                 <td>SVRE264108</td>
                                 <td>Praktikum Instalasi Listrik Dasar</td>
-                                <td>1</td>
-                                <td>2025</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">2025</td>
                                 <td>
                                     <a href="#" class="btn btn-sm btn-primary w-100">
-                                        <i class="bi bi-download"></i> Unduh
+                                        <i class="bi bi-download"></i> Unduh Modul
                                     </a>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>3</td>
+                                <td>SVRE264201</td>
+                                <td>Praktikum Rangkaian Listrik</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">2025</td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary w-100" disabled>
+                                        <i class="bi bi-hourglass-split"></i> Akan dikembangkan
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -99,16 +117,16 @@
                 }
             });
 
-            // Fungsi filter diperbarui nama fungsinya menjadi filterPraktik
-            window.filterPraktik = function(praktikVal) {
+            // Fungsi filter dikembalikan menjadi filterSemester
+            window.filterSemester = function(semesterVal) {
                 $('.filter-btn').removeClass('active');
                 $(event.target).addClass('active');
 
-                // column(3) menunjuk pada kolom ke-4 yaitu kolom "Praktik" (Indeks dimulai dari 0)
-                if(praktikVal === 'All') {
+                // column(3) menunjuk pada kolom "Sem"
+                if(semesterVal === 'All') {
                     table.column(3).search('').draw();
                 } else {
-                    table.column(3).search('^' + praktikVal + '$', true, false).draw();
+                    table.column(3).search('^' + semesterVal + '$', true, false).draw();
                 }
             }
         });
