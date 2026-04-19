@@ -33,9 +33,9 @@
             <div class="card-body p-4">
                 
                 <div class="mb-4 d-flex gap-2 flex-wrap">
-                    <button class="btn btn-outline-primary btn-sm filter-btn active" onclick="filterSemester('All')">Semua Semester</button>
-                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterSemester('1')">Semester 1</button>
-                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterSemester('2')">Semester 2</button>
+                    <button class="btn btn-outline-primary btn-sm filter-btn active" onclick="filterPraktik('All')">Semua Praktik</button>
+                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterPraktik('1')">Praktik 1</button>
+                    <button class="btn btn-outline-primary btn-sm filter-btn" onclick="filterPraktik('2')">Praktik 2</button>
                 </div>
 
                 <div class="table-responsive">
@@ -44,44 +44,37 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="15%">Kode</th>
-                                <th width="30%">Nama Modul</th>
-                                <th width="10%">Sem</th>
-                                <th width="25%">Deskripsi</th>
-                                <th width="15%">Aksi</th>
+                                <th width="35%">Mata Kuliah (ID)</th>
+                                <th width="10%">Praktik</th>
+                                <th width="15%">Tahun Pembuatan</th>
+                                <th width="20%">Link Modul</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>TRE261102</td>
-                                <td>Praktikum Pengukuran Besaran Listrik</td>
-                                <td>1</td>
-                                <td>Dasar-dasar pengukuran alat ukur listrik.</td>
-                                <td><a href="#" class="btn btn-sm btn-primary w-100"><i class="bi bi-download"></i> Unduh</a></td>
+                                <td>SVRE264107</td>
+                                <td>Praktikum Pengukuran Listrik</td>
+                                <td>2</td>
+                                <td>2025</td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary w-100" disabled>
+                                        <i class="bi bi-hourglass-split"></i> Akan dikembangkan
+                                    </button>
+                                </td>
                             </tr>
+                            
                             <tr>
                                 <td>2</td>
-                                <td>TRE261103</td>
+                                <td>SVRE264108</td>
                                 <td>Praktikum Instalasi Listrik Dasar</td>
                                 <td>1</td>
-                                <td>Perancangan dan pemasangan instalasi domestik.</td>
-                                <td><a href="#" class="btn btn-sm btn-primary w-100"><i class="bi bi-download"></i> Unduh</a></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>TRE261105</td>
-                                <td>Praktikum Pemrograman Komputer</td>
-                                <td>1</td>
-                                <td>Logika pemrograman menggunakan C++/Python.</td>
-                                <td><a href="#" class="btn btn-sm btn-primary w-100"><i class="bi bi-download"></i> Unduh</a></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>TRE261201</td>
-                                <td>Praktikum Rangkaian Listrik</td>
-                                <td>2</td>
-                                <td>Analisis hukum Ohm, Kirchhoff, dan rangkaian AC.</td>
-                                <td><a href="#" class="btn btn-sm btn-primary w-100"><i class="bi bi-download"></i> Unduh</a></td>
+                                <td>2025</td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-primary w-100">
+                                        <i class="bi bi-download"></i> Unduh
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -97,18 +90,25 @@
     <script>
         $(document).ready(function() {
             var table = $('#tabelModul').DataTable({
-                "language": { "search": "Cari Modul:" }
+                "language": { 
+                    "search": "Cari Modul:",
+                    "lengthMenu": "Tampilkan _MENU_ data",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    "infoEmpty": "Tidak ada data yang ditemukan",
+                    "zeroRecords": "Pencarian tidak menemukan hasil"
+                }
             });
 
-            // Fungsi untuk filter semester melalui tombol
-            window.filterSemester = function(semester) {
+            // Fungsi filter diperbarui nama fungsinya menjadi filterPraktik
+            window.filterPraktik = function(praktikVal) {
                 $('.filter-btn').removeClass('active');
                 $(event.target).addClass('active');
 
-                if(semester === 'All') {
+                // column(3) menunjuk pada kolom ke-4 yaitu kolom "Praktik" (Indeks dimulai dari 0)
+                if(praktikVal === 'All') {
                     table.column(3).search('').draw();
                 } else {
-                    table.column(3).search('^' + semester + '$', true, false).draw();
+                    table.column(3).search('^' + praktikVal + '$', true, false).draw();
                 }
             }
         });
